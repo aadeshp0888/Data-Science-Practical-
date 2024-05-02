@@ -1,0 +1,54 @@
+import sqlite3
+# Connect to SQLite database
+conn = sqlite3.connect('my_database.db')
+cursor = conn.cursor()
+# Create customers table
+cursor.execute('''CREATE TABLE IF NOT EXISTS customers (
+ customer_id INTEGER PRIMARY KEY,
+ name TEXT,
+ age INTEGER,
+ email TEXT
+ )''')
+# Create orders table
+cursor.execute('''CREATE TABLE IF NOT EXISTS orders (
+ order_id INTEGER PRIMARY KEY,
+ customer_id INTEGER,
+ product TEXT,
+ quantity INTEGER,
+ order_date DATE
+ )''')
+# Insert data into customers table
+cursor.execute('''INSERT INTO customers (customer_id, name, age, email)
+ VALUES (1, 'John Doe', 30, 'john@example.com')''')
+cursor.execute('''INSERT INTO customers (customer_id, name, age, email)
+ VALUES (2, 'Jane Smith', 25, 'jane@example.com')''')
+# Insert data into orders table
+cursor.execute('''INSERT INTO orders (order_id, customer_id, product, quantity, order_date)
+ VALUES (1, 1, 'Product A', 2, '2024-04-01')''')
+cursor.execute('''INSERT INTO orders (order_id, customer_id, product, quantity, order_date)
+ VALUES (2, 1, 'Product B', 1, '2024-04-02')''')
+cursor.execute('''INSERT INTO orders (order_id, customer_id, product, quantity, order_date)
+ VALUES (3, 2, 'Product C', 3, '2024-04-02')''')
+# Commit changes and close connection
+conn.commit()
+conn.close()
+# Connect again to execute queries
+conn = sqlite3.connect('my_database.db')
+cursor = conn.cursor()
+# Run queries
+cursor.execute('''SELECT * FROM customers''')
+print("Customers:")
+for row in cursor.fetchall():
+ print(row)
+cursor.execute('''SELECT * FROM orders WHERE customer_id = 1''')
+print("\nOrders for Customer 1:")
+for row in cursor.fetchall():
+ print(row)
+cursor.execute('''SELECT c.name, o.product, o.quantity
+ FROM customers c
+ JOIN orders o ON c.customer_id = o.customer_id''')
+print("\nCustomer Orders:")
+for row in cursor.fetchall():
+ print(row)
+# Close connection
+conn.close()

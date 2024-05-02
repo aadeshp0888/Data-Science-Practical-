@@ -1,0 +1,53 @@
+object FibonacciSeries {
+  def main(args: Array[String]): Unit = {
+    val n = 10 // Number of terms in Fibonacci series
+    println("Fibonacci series up to " + n + " terms:")
+    for (i <- 0 until n) {
+      print(fibonacci(i) + " ")
+    }
+  }
+
+  def fibonacci(n: Int): Int = {
+    if (n <= 1) {
+      n
+    } else {
+      fibonacci(n - 1) + fibonacci(n - 2)
+    }
+  }
+}
+
+
+Output
+
+    Microsoft Windows [Version 10.0.22621.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\aids\scala3\src\main\scala>scalac switch.scala
+
+D:\aids\scala3\src\main\scala>scala switch
+Ignoring spurious arguments: switch
+Welcome to Scala 3.4.1 (21.0.1, Java Java HotSpot(TM) 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala>
+
+D:\aids\scala3\src\main\scala>switch
+'switch' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\aids\scala3\src\main\scala>scala switch
+Ignoring spurious arguments: switch
+Welcome to Scala 3.4.1 (21.0.1, Java Java HotSpot(TM) 64-Bit Server VM).
+Type in expressions for evaluation. Or try :help.
+
+scala>
+
+D:\aids\scala3\src\main\scala>scala switch.scala
+Two
+
+D:\aids\scala3\src\main\scala>scala switch.scala
+there was 1 deprecation warning; re-run with -deprecation for details
+1 warning found
+Fibonacci series up to 10 terms:
+0 1 1 2 3 5 8 13 21 34
+D:\aids\scala3\src\main\scala>
